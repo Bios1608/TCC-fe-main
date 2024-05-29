@@ -1,0 +1,19 @@
+# Ignore node_modules directory
+node_modules
+
+# Ignore build output directories
+dist
+build
+
+# Ignore Dockerfile and .dockerignore
+Dockerfile
+.dockerignore
+
+# Ignore local environment configuration files
+.env
+.env.local
+
+# Ignore log files
+*.log
+
+# Ignore any other files you don't want in the Docker image
