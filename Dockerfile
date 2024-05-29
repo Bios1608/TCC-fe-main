@@ -5,16 +5,16 @@ FROM node:14 AS builder
 WORKDIR /app
 
 # Copy package.json and package-lock.json
-COPY package.json yarn.lock ./
+COPY package.json package-lock.json ./
 
 # Install dependencies
-RUN yarn install
+RUN npm install
 
 # Copy the rest of the application code
 COPY . .
 
 # Build the application
-RUN yarn build
+RUN npm run build
 
 # Stage 2: Serve the application
 FROM node:14
@@ -26,10 +26,10 @@ WORKDIR /app
 COPY --from=builder /app ./
 
 # Install production dependencies
-RUN yarn install --production
+RUN npm install --only=production
 
 # Expose the port the app runs on
 EXPOSE 8080
 
 # Command to run the app
-CMD ["yarn", "start", "-p", "8080"]
+CMD ["npm", "start", "--", "-p", "8080"]
